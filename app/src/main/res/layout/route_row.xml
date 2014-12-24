@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+    <TextView
+        android:id="@+id/row_path_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/row_cost_textview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

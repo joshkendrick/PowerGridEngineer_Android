@@ -1,0 +1,48 @@
+# Built Application Files
+*.apk
+*.ap_
+
+# Dex VM
+*.dex
+
+# Java Class Files
+*.class
+
+# Generated Files
+bin/
+gen/
+
+# Mac OS X
+.DS_Store
+*.tmp
+*.bak
+*.swp
+
+# Eclipse
+tmp/**
+.classpath
+.project
+.settings
+
+# Android Studio
+*.iml
+.idea/
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+
+# Ant Local Configuration
+local.properties
+
+*.keystore
+
+# Crashlytics
+com_crashlytics_export_strings.xml
+assets/crashlytics-build.properties
+crashlytics.properties
+
+# TestFlight Deployment Script
+testflight-credentials
+testflight-release-notes

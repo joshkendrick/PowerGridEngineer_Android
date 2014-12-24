@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="country_names">
+        <item>United States</item>
+        <item>Germany</item>
+    </string-array>
+
+    <string-array name="country_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="step_names">
+        <item>Step 1</item>
+        <item>Step 2</item>
+        <item>Step 3</item>
+    </string-array>
+
+    <string-array name="step_values">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- application strings -->
+    <string name="app_name">Power Grid Engineer</string>
+    <string name="database_name">power_grid.sqlite</string>
+
+    <!-- action bar strings -->
+    <string name="action_settings">Settings</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_info">Info</string>
+
+    <string name="info_title">Info</string>
+    <string name="info_message">Application by 31Ten Software\n\nContact us on our website:
+        www.31tensoftware.com\n\nIcons by Julie West\n\nThis application is not associated with
+        Rio Grande, and is merely a fan production.</string>
+    <string name="ok">OK</string>
+
+    <!-- main activity strings -->
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="cost">Cost</string>
+
+    <!-- preferences screen strings -->
+    <string name="step_key">pref_step</string>
+    <string name="step_title">Current Step</string>
+    <string name="step_category_key">pref_key_step_category</string>
+    <string name="default_step_name">Step 1</string>
+    <string name="default_step_value">10</string>
+
+    <string name="country_key">pref_country</string>
+    <string name="country_title">Country</string>
+    <string name="country_category_key">pref_key_country_category</string>
+    <string name="default_country_name">United States</string>
+    <string name="default_country_value">1</string>
+
+    <string name="regions_title">Regions In Use</string>
+    <string name="regions_category_key">pref_key_regions_category</string>
+    <string name="region_blue_key">pref_key_region_blue</string>
+    <string name="region_blue_value">Blue</string>
+    <string name="region_brown_key">pref_key_region_brown</string>
+    <string name="region_brown_value">Brown</string>
+    <string name="region_green_key">pref_key_region_green</string>
+    <string name="region_green_value">Green</string>
+    <string name="region_purple_key">pref_key_region_purple</string>
+    <string name="region_purple_value">Purple</string>
+    <string name="region_red_key">pref_key_region_red</string>
+    <string name="region_red_value">Red</string>
+    <string name="region_teal_key">pref_key_region_teal</string>
+    <string name="region_teal_value">Teal</string>
+    <string name="region_yellow_key">pref_key_region_yellow</string>
+    <string name="region_yellow_value">Yellow</string>
+
+</resources>
