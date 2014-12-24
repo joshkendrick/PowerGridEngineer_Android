@@ -20,7 +20,7 @@ import com.thirtyonetensoftware.android.powergridengineer.model.Path;
  */
 public enum DijkstraAlgorithm {
 
-    INSTANCE;
+    ;
 
     /**
      * Method that makes use of Dijkstra's Algorithm to find the shortest path between 2 cities on

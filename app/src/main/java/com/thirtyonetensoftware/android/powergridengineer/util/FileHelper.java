@@ -1,11 +1,8 @@
 package com.thirtyonetensoftware.android.powergridengineer.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 /**
  * FileHelper
@@ -89,35 +86,4 @@ public class FileHelper {
     /*public static void copyFile(File fromFile, File toFile) throws IOException {
         copyFile(new FileInputStream(fromFile), new FileOutputStream(toFile));
     }*/
-
-    /**
-     * Creates the specified <i><b>toFile</b></i> that is a byte for byte a copy of
-     * <i><b>fromFile</b></i>. If <i><b>toFile</b></i> already existed, then it will be replaced
-     * with a copy of <i><b>fromFile</b></i>. The name and path of <i><b>toFile</b></i> will be
-     * that
-     * of <i><b>toFile</b></i>. Both <i><b>fromFile</b></i> and <i><b>toFile</b></i> will be closed
-     * by this operation.
-     *
-     * @param fromFile - FileInputStream for the file to copy from.
-     * @param toFile   - FileInputStream for the file to copy to.
-     */
-    public static void copyFile(FileInputStream fromFile, FileOutputStream toFile) throws
-                                                                                   IOException {
-        FileChannel fromChannel = fromFile.getChannel();
-        FileChannel toChannel = toFile.getChannel();
-
-        try {
-            fromChannel.transferTo(0, fromChannel.size(), toChannel);
-        }
-        finally {
-            try {
-                if ( fromChannel != null ) {
-                    fromChannel.close();
-                }
-            }
-            finally {
-                toChannel.close();
-            }
-        }
-    }
 }

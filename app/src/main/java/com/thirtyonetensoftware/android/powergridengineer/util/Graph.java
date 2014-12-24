@@ -23,7 +23,7 @@ import com.thirtyonetensoftware.android.powergridengineer.model.Path;
  */
 public enum Graph {
 
-    INSTANCE;
+    ;
 
     private static HashMap<City, Set<Path>> graph = new HashMap<>();
 
