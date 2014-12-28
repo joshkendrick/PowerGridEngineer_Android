@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingBottom="4dp"
+    android:gravity="center_vertical"
     android:paddingTop="4dp">
 
     <TextView
         android:id="@+id/row_path_textview"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/row_cost_textview"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="6"
         android:gravity="center"
         android:textSize="16sp"
