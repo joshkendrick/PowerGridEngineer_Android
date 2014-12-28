@@ -165,6 +165,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
             callback.onPreferencesSelected();
         }
         else if ( id == R.id.action_clear ) {
+            costTextView.setText("");
             listViewAdapter.clear();
         }
         else if ( id == R.id.action_info ) {
@@ -190,7 +191,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
         String stepText = getStepText(Integer.valueOf(stepValue));
 
         if ( source == null || destination == null || source.equals(destination) ) {
-            costTextView.setText("0 + " + stepText + " (" + stepValue + ") = 0");
+            costTextView.setText("");
         }
         else {
             HashMap<City, Path> route = DijkstraAlgorithm.determineShortestRoute(source,
