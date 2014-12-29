@@ -16,9 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.thirtyonetensoftware.android.powergridengineer.R;
@@ -27,6 +27,7 @@ import com.thirtyonetensoftware.android.powergridengineer.model.City;
 import com.thirtyonetensoftware.android.powergridengineer.model.Path;
 import com.thirtyonetensoftware.android.powergridengineer.util.DijkstraAlgorithm;
 import com.thirtyonetensoftware.android.powergridengineer.util.Graph;
+import com.thirtyonetensoftware.android.powergridengineer.widget.PGESpinner;
 import com.thirtyonetensoftware.android.powergridengineer.widget.RecentCalculationArrayAdapter;
 
 /**
@@ -37,13 +38,13 @@ import com.thirtyonetensoftware.android.powergridengineer.widget.RecentCalculati
  * <p/>
  * Author: Josh Kendrick
  */
-public class MainFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class MainFragment extends Fragment {
 
     private static final String ROUTES_LISTVIEW_KEY = "routes_listview_bundle_key";
 
-    private Spinner fromSpinner;
+    private PGESpinner fromSpinner;
 
-    private Spinner toSpinner;
+    private PGESpinner toSpinner;
 
     private ArrayAdapter<City> spinnerAdapter;
 
@@ -52,8 +53,6 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
     private RecentCalculationArrayAdapter listViewAdapter;
 
     private ArrayList<DijkstraAlgorithm.Result> cachedResults;
-
-    private boolean runCalculations = false;
 
     private AlertDialog.Builder infoBuilder;
 
@@ -72,12 +71,14 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
                                             android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        fromSpinner = (Spinner) rootView.findViewById(R.id.source_dropdown);
+        fromSpinner = (PGESpinner) rootView.findViewById(R.id.source_dropdown);
         fromSpinner.setAdapter(spinnerAdapter);
-        fromSpinner.setOnItemSelectedListener(this);
-        toSpinner = (Spinner) rootView.findViewById(R.id.destination_dropdown);
+        fromSpinner.setSelection(0, false);
+        fromSpinner.setOnItemSelectedListener(new PGEOnItemSelectedListener());
+        toSpinner = (PGESpinner) rootView.findViewById(R.id.destination_dropdown);
         toSpinner.setAdapter(spinnerAdapter);
-        toSpinner.setOnItemSelectedListener(this);
+        toSpinner.setSelection(0, false);
+        toSpinner.setOnItemSelectedListener(new PGEOnItemSelectedListener());
 
         ListView listView = (ListView) rootView.findViewById(R.id.calculations_listview);
         listViewAdapter = new RecentCalculationArrayAdapter(getActivity(), R.layout.route_row);
@@ -109,16 +110,12 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
             dbHelper.close();
         }
 
-        runCalculations = false;
-
         Graph.buildGraph(getActivity());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        runCalculations = false;
 
         cachedResults = new ArrayList<>();
         for ( int i = 0; i < listViewAdapter.getCount(); i++ ) {
@@ -175,41 +172,6 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if ( !runCalculations ) {
-            runCalculations = true;
-            return;
-        }
-
-        City source = (City) fromSpinner.getSelectedItem();
-        City destination = (City) toSpinner.getSelectedItem();
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String stepValue = sharedPref.getString(getString(R.string.step_key),
-                                                getString(R.string.default_step_value));
-        String stepText = getStepText(Integer.valueOf(stepValue));
-
-        if ( source == null || destination == null || source.equals(destination) ) {
-            costTextView.setText("");
-        }
-        else {
-            HashMap<City, Path> route = DijkstraAlgorithm.determineShortestRoute(source,
-                                                                                 destination);
-
-            DijkstraAlgorithm.Result result = DijkstraAlgorithm.processRoute(route, destination,
-                                                                             Integer.valueOf(stepValue));
-            costTextView.setText(result.getCost() + " + " + stepText + " (" + stepValue + ") " +
-                                     "= " + (result.getCost() + result.getStepCost()));
-
-            listViewAdapter.insert(result, 0);
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
     private String getStepText(int stepValue) {
         switch ( stepValue ) {
             case 10:
@@ -237,5 +199,45 @@ public class MainFragment extends Fragment implements AdapterView.OnItemSelected
 
     public interface OnPreferencesSelectedListener {
         public void onPreferencesSelected();
+    }
+
+    private class PGEOnItemSelectedListener implements OnItemSelectedListener {
+
+        private boolean firstSelection = true;
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if ( firstSelection ) {
+                firstSelection = false;
+                return;
+            }
+
+            City source = (City) fromSpinner.getSelectedItem();
+            City destination = (City) toSpinner.getSelectedItem();
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String stepValue = sharedPref.getString(getString(R.string.step_key),
+                                                    getString(R.string.default_step_value));
+            String stepText = getStepText(Integer.valueOf(stepValue));
+
+            if ( source == null || destination == null || source.equals(destination) ) {
+                costTextView.setText("");
+            }
+            else {
+                HashMap<City, Path> route = DijkstraAlgorithm.determineShortestRoute(source,
+                                                                                     destination);
+
+                DijkstraAlgorithm.Result result = DijkstraAlgorithm.processRoute(route, destination,
+                                                                                 Integer.valueOf(stepValue));
+                costTextView.setText(result.getCost() + " + " + stepText + " (" + stepValue + ") " +
+                                         "= " + (result.getCost() + result.getStepCost()));
+
+                listViewAdapter.insert(result, 0);
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
     }
 }

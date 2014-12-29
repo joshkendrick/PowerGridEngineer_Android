@@ -24,7 +24,7 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
 
-        <Spinner
+        <com.thirtyonetensoftware.android.powergridengineer.widget.PGESpinner
             android:id="@+id/source_dropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:textSize="14sp"
             android:textStyle="bold"/>
 
-        <Spinner
+        <com.thirtyonetensoftware.android.powergridengineer.widget.PGESpinner
             android:id="@+id/destination_dropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
