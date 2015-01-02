@@ -8,8 +8,8 @@ android {
         applicationId "com.thirtyonetensoftware.android.powergridengineer"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "v0.3.0"
     }
     buildTypes {
         release {
