@@ -112,8 +112,7 @@ public class MainFragment extends Fragment {
         }
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        stepValue = sharedPref.getString(getString(R.string.step_key),
-                                                getString(R.string.default_step_value));
+        stepValue = sharedPref.getString(getString(R.string.step_key), getString(R.string.default_step_value));
         stepText = getStepText(Integer.valueOf(stepValue));
 
         Graph.buildGraph(getActivity());
@@ -168,6 +167,8 @@ public class MainFragment extends Fragment {
             callback.onPreferencesSelected();
         }
         else if ( id == R.id.action_clear ) {
+            fromSpinner.setSelection(0, false);
+            toSpinner.setSelection(0, false);
             costTextView.setText("");
             listViewAdapter.clear();
         }
