@@ -60,6 +60,10 @@ public class MainFragment extends Fragment {
 
     private DBHelper dbHelper;
 
+    private String stepValue;
+
+    private String stepText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,11 +77,8 @@ public class MainFragment extends Fragment {
 
         fromSpinner = (PGESpinner) rootView.findViewById(R.id.source_dropdown);
         fromSpinner.setAdapter(spinnerAdapter);
-        fromSpinner.setSelection(0, false);
-        fromSpinner.setOnItemSelectedListener(new PGEOnItemSelectedListener());
         toSpinner = (PGESpinner) rootView.findViewById(R.id.destination_dropdown);
         toSpinner.setAdapter(spinnerAdapter);
-        toSpinner.setSelection(0, false);
         toSpinner.setOnItemSelectedListener(new PGEOnItemSelectedListener());
 
         ListView listView = (ListView) rootView.findViewById(R.id.calculations_listview);
@@ -109,6 +110,11 @@ public class MainFragment extends Fragment {
         finally {
             dbHelper.close();
         }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        stepValue = sharedPref.getString(getString(R.string.step_key),
+                                                getString(R.string.default_step_value));
+        stepText = getStepText(Integer.valueOf(stepValue));
 
         Graph.buildGraph(getActivity());
     }
@@ -214,11 +220,6 @@ public class MainFragment extends Fragment {
 
             City source = (City) fromSpinner.getSelectedItem();
             City destination = (City) toSpinner.getSelectedItem();
-
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String stepValue = sharedPref.getString(getString(R.string.step_key),
-                                                    getString(R.string.default_step_value));
-            String stepText = getStepText(Integer.valueOf(stepValue));
 
             if ( source == null || destination == null || source.equals(destination) ) {
                 costTextView.setText("");
