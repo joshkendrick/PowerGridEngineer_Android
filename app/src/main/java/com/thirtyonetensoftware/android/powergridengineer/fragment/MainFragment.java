@@ -110,14 +110,21 @@ public class MainFragment extends Fragment {
         finally {
             dbHelper.close();
         }
-        fromSpinner.setSelection(0, false);
-        toSpinner.setSelection(0, false);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         stepValue = sharedPref.getString(getString(R.string.step_key), getString(R.string.default_step_value));
         stepText = getStepText(Integer.valueOf(stepValue));
 
         Graph.buildGraph(getActivity());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // must be called in onStart; onResume is too late or something
+        fromSpinner.setSelection(0, false);
+        toSpinner.setSelection(0, false);
     }
 
     @Override
