@@ -110,6 +110,8 @@ public class MainFragment extends Fragment {
         finally {
             dbHelper.close();
         }
+        fromSpinner.setSelection(0, false);
+        toSpinner.setSelection(0, false);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         stepValue = sharedPref.getString(getString(R.string.step_key), getString(R.string.default_step_value));
