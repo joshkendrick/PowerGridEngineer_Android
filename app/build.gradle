@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.19.1'
     }
 }
 apply plugin: 'com.android.application'
@@ -13,7 +13,6 @@ apply plugin: 'io.fabric'
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
-
 
 android {
     compileSdkVersion 22
@@ -24,12 +23,50 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 5
-        versionName "v0.3.1"
+        versionName APP_VERSION
     }
-    buildTypes {
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            keyAlias "31TenSoftware-Android"
+            storeFile file('../31tensoftware.jks')
+            storePassword getKeystorePassword()
+            keyPassword getSigningKeyPassword()
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "REPORT_CRASHES", "false"
+
+            versionNameSuffix "+1-DEBUG"
+            applicationIdSuffix ".debug"
+
+            ext.enableCrashlytics = false
+        }
+
+        beta {
+            buildConfigField "boolean", "REPORT_CRASHES", "true"
+
+            versionNameSuffix "+1-BETA"
+            applicationIdSuffix ".beta"
+
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            buildConfigField "boolean", "REPORT_CRASHES", "true"
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            def formatted = file.name.replace(
+                    ".apk", "-" + defaultConfig.versionCode + ".apk")
+            output.outputFile = new File(file.parent, formatted)
         }
     }
 }
@@ -38,5 +75,35 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.3.2@aar') {
         transitive = true;
+    }
+}
+
+// def getBuildNumber() {
+//     return "git log --pretty=format:''".execute().text.readLines().size()
+// }
+
+def getKeystorePassword() {
+    def localProperties = project.file('../local.properties')
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        return properties.getProperty('key.store.password')
+    } else {
+        return System.console().readLine("\nKeystore Password: ")
+    }
+}
+
+def getSigningKeyPassword() {
+    def localProperties = project.file('../local.properties')
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        return properties.getProperty('key.alias.password')
+    } else {
+        return System.console().readLine("\nSigning Key Password: ")
     }
 }
