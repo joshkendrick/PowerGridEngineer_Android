@@ -20,7 +20,7 @@ public enum Region {
 
     private final int value;
 
-    private Region(int value) {
+    Region(int value) {
         this.value = value;
     }
 

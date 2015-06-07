@@ -214,7 +214,7 @@ public class MainFragment extends Fragment {
     }
 
     public interface OnPreferencesSelectedListener {
-        public void onPreferencesSelected();
+        void onPreferencesSelected();
     }
 
     private class PGEOnItemSelectedListener implements OnItemSelectedListener {

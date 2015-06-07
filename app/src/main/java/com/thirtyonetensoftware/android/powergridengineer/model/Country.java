@@ -15,7 +15,7 @@ public enum Country {
 
     private final int value;
 
-    private Country(int value) {
+    Country(int value) {
         this.value = value;
     }
 
