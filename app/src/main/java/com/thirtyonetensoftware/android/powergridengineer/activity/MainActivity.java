@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import com.crashlytics.android.Crashlytics;
 import com.thirtyonetensoftware.android.powergridengineer.R;
 import com.thirtyonetensoftware.android.powergridengineer.fragment.MainFragment;
 import com.thirtyonetensoftware.android.powergridengineer.fragment.PreferencesFragment;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * MainActivity
@@ -25,6 +27,7 @@ public class MainActivity extends Activity implements MainFragment.OnPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
