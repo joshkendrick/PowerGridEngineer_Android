@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
     <PreferenceCategory
         android:key="@string/step_category_key"
         android:title="@string/step_title">
@@ -11,7 +9,7 @@
             android:entryValues="@array/step_values"
             android:key="@string/step_key"
             android:summary="@string/default_step_name"
-            android:title="@string/step_title"/>
+            android:title="@string/step_title" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="@string/regions_category_key"
@@ -20,31 +18,31 @@
             android:defaultValue="false"
             android:enabled="false"
             android:key="@string/region_blue_key"
-            android:title="@string/region_blue_value"/>
+            android:title="@string/region_blue_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_brown_key"
-            android:title="@string/region_brown_value"/>
+            android:title="@string/region_brown_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_green_key"
-            android:title="@string/region_green_value"/>
+            android:title="@string/region_green_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_purple_key"
-            android:title="@string/region_purple_value"/>
+            android:title="@string/region_purple_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_red_key"
-            android:title="@string/region_red_value"/>
+            android:title="@string/region_red_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_teal_key"
-            android:title="@string/region_teal_value"/>
+            android:title="@string/region_teal_value" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/region_yellow_key"
-            android:title="@string/region_yellow_value"/>
+            android:title="@string/region_yellow_value" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="@string/country_category_key"
@@ -55,7 +53,6 @@
             android:entryValues="@array/country_values"
             android:key="@string/country_key"
             android:summary="@string/default_country_name"
-            android:title="@string/country_title"/>
+            android:title="@string/country_title" />
     </PreferenceCategory>
-
 </PreferenceScreen>

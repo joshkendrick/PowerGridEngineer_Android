@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
@@ -22,13 +21,13 @@
             android:gravity="center_vertical"
             android:text="@string/from"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <com.thirtyonetensoftware.android.powergridengineer.widget.PGESpinner
             android:id="@+id/source_dropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,13 +41,13 @@
             android:gravity="center_vertical"
             android:text="@string/to"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <com.thirtyonetensoftware.android.powergridengineer.widget.PGESpinner
             android:id="@+id/destination_dropdown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +63,7 @@
             android:gravity="center_vertical"
             android:text="@string/cost"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/cost_textview"
@@ -74,14 +73,13 @@
             android:gravity="center"
             android:textColor="#ffff6b0e"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/calculations_listview"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"/>
-
+        android:layout_height="fill_parent" />
     <!--<TextView
         android:id="@id/android:empty"
         android:layout_width="match_parent"
