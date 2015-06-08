@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.thirtyonetensoftware.android.powergridengineer.activity.MainActivity"
-    tools:ignore="MergeRootFrame"
-    android:orientation="vertical">
+    tools:ignore="MergeRootFrame">
 
     <include layout="@layout/toolbar" />
 
