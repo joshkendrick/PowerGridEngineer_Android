@@ -10,7 +10,7 @@
     <string name="info_title">Info</string>
     <string name="info_message">Application by 31Ten Software\n\nContact us on our website:
         www.31tensoftware.com\n\nThis application is not associated with
-        Rio Grande, and is merely a fan production.</string>
+        Rio Grande, and is merely a fan production.\n\nVersion: %s</string>
     <string name="ok">OK</string>
     <!-- main activity strings -->
     <string name="to">To</string>

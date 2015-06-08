@@ -1,8 +1,9 @@
 package com.thirtyonetensoftware.android.powergridengineer.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.crashlytics.android.Crashlytics;
 import com.thirtyonetensoftware.android.powergridengineer.BuildConfig;
@@ -19,7 +20,7 @@ import io.fabric.sdk.android.Fabric;
  * <p/>
  * Author: Josh Kendrick
  */
-public class MainActivity extends Activity implements MainFragment.OnPreferencesSelectedListener {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnPreferencesSelectedListener {
 
     private static final String MAIN_FRAGMENT_KEY = "main_fragment_key";
 
@@ -33,17 +34,23 @@ public class MainActivity extends Activity implements MainFragment.OnPreferences
         }
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         if ( savedInstanceState == null ) {
-            getFragmentManager().beginTransaction().replace(R.id.container, new MainFragment(),
-                                                            MAIN_FRAGMENT_KEY).commit();
+            getFragmentManager().beginTransaction()
+                                .replace(R.id.container, new MainFragment(), MAIN_FRAGMENT_KEY)
+                                .commit();
         }
     }
 
     @Override
     public void onPreferencesSelected() {
-        getFragmentManager().beginTransaction().replace(R.id.container,
-                                                        new PreferencesFragment(), PREFERENCES_FRAGMENT_KEY).addToBackStack(null).commit();
+        getFragmentManager().beginTransaction()
+                            .replace(R.id.container, new PreferencesFragment(), PREFERENCES_FRAGMENT_KEY)
+                            .addToBackStack(null)
+                            .commit();
     }
 }

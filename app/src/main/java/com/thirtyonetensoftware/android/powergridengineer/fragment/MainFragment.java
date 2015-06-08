@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.thirtyonetensoftware.android.powergridengineer.BuildConfig;
 import com.thirtyonetensoftware.android.powergridengineer.R;
 import com.thirtyonetensoftware.android.powergridengineer.database.DBHelper;
 import com.thirtyonetensoftware.android.powergridengineer.model.City;
@@ -63,6 +64,8 @@ public class MainFragment extends Fragment {
     private String stepValue;
 
     private String stepText;
+
+    private String infoMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -148,6 +151,9 @@ public class MainFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
+        String message = getActivity().getString(R.string.info_message);
+        infoMessage = String.format(message, BuildConfig.VERSION_NAME);
+
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
@@ -205,7 +211,7 @@ public class MainFragment extends Fragment {
         if ( infoBuilder == null ) {
             infoBuilder = new AlertDialog.Builder(getActivity());
             infoBuilder.setTitle(getActivity().getString(R.string.info_title));
-            infoBuilder.setMessage(getActivity().getString(R.string.info_message));
+            infoBuilder.setMessage(infoMessage);
             infoBuilder.setCancelable(true);
             infoBuilder.setPositiveButton(getActivity().getString(R.string.ok), null);
         }

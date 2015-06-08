@@ -3,11 +3,12 @@
     package="com.thirtyonetensoftware.android.powergridengineer"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.PowerGridEngineer">
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -21,5 +22,4 @@
             android:name="io.fabric.ApiKey"
             android:value="19e5fcd8713a86b78a0b66ab335a436ce59b52ce" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
