@@ -22,7 +22,7 @@ android {
         applicationId "com.thirtyonetensoftware.android.powergridengineer"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 5
+        versionCode 6
         versionName APP_VERSION
     }
 
