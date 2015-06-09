@@ -3,15 +3,10 @@
 
     <style name="Theme.PowerGridEngineer" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/black</item>
-        <!--<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
     </style>
 
     <style name="Theme.PowerGridEngineer.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!--<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
         <item name="navigationIcon">@mipmap/ic_launcher</item>
         <item name="android:background">@color/primary_material_dark</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="elevation">@dimen/elevation_high</item>
-        <item name="android:gravity">center_vertical</item>
     </style>
 </resources>

@@ -43,4 +43,5 @@
     <string name="region_teal_value">Teal</string>
     <string name="region_yellow_key">pref_key_region_yellow</string>
     <string name="region_yellow_value">Yellow</string>
+    <string name="settings">Settings</string>
 </resources>

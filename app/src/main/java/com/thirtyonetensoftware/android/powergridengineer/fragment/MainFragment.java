@@ -3,16 +3,11 @@ package com.thirtyonetensoftware.android.powergridengineer.fragment;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.thirtyonetensoftware.android.powergridengineer.BuildConfig;
 import com.thirtyonetensoftware.android.powergridengineer.R;
 import com.thirtyonetensoftware.android.powergridengineer.database.DBHelper;
 import com.thirtyonetensoftware.android.powergridengineer.model.City;
@@ -55,17 +49,11 @@ public class MainFragment extends Fragment {
 
     private ArrayList<DijkstraAlgorithm.Result> cachedResults;
 
-    private AlertDialog.Builder infoBuilder;
-
-    private OnPreferencesSelectedListener callback;
-
     private DBHelper dbHelper;
 
     private String stepValue;
 
     private String stepText;
-
-    private String infoMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,51 +135,11 @@ public class MainFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        String message = getActivity().getString(R.string.info_message);
-        infoMessage = String.format(message, BuildConfig.VERSION_NAME);
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            callback = (OnPreferencesSelectedListener) activity;
-        }
-        catch ( ClassCastException e ) {
-            throw new ClassCastException(activity.toString() + " must implement " +
-                                             OnPreferencesSelectedListener.class.getSimpleName());
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if ( id == R.id.action_settings ) {
-            callback.onPreferencesSelected();
-        }
-        else if ( id == R.id.action_clear ) {
-            fromSpinner.setSelection(0, false);
-            toSpinner.setSelection(0, false);
-            costTextView.setText("");
-            listViewAdapter.clear();
-        }
-        else if ( id == R.id.action_info ) {
-            showInfoPopup();
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void clear() {
+        fromSpinner.setSelection(0, false);
+        toSpinner.setSelection(0, false);
+        costTextView.setText("");
+        listViewAdapter.clear();
     }
 
     private String getStepText(int stepValue) {
@@ -205,22 +153,6 @@ public class MainFragment extends Fragment {
             default:
                 return null;
         }
-    }
-
-    private void showInfoPopup() {
-        if ( infoBuilder == null ) {
-            infoBuilder = new AlertDialog.Builder(getActivity());
-            infoBuilder.setTitle(getActivity().getString(R.string.info_title));
-            infoBuilder.setMessage(infoMessage);
-            infoBuilder.setCancelable(true);
-            infoBuilder.setPositiveButton(getActivity().getString(R.string.ok), null);
-        }
-
-        infoBuilder.show();
-    }
-
-    public interface OnPreferencesSelectedListener {
-        void onPreferencesSelected();
     }
 
     private class PGEOnItemSelectedListener implements OnItemSelectedListener {
